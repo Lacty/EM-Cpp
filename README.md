@@ -1,2 +1,2 @@
 
-# Read 'Effective Modern C++' and Learn
+# Read 'Effective Modern C++' and Learn C++
