@@ -22,7 +22,7 @@ void func(T src) {}
 
 int main() {
   {
-    // 引数が参照型であれば参照は無視される
+    // Tが参照でもポインタでもない場合は値渡し(コピー)となる
     int x = 0;
     const int cx = x;
     const int& rx = x;
