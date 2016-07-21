@@ -23,6 +23,9 @@ void func0(T src) {}
 template<typename T>
 void func1(T& src) {}
 
+template<typename T>
+void func2(const T& src) {}
+
 int main() {
   int x = 0;
   const int cx = x;
@@ -42,4 +45,12 @@ int main() {
   func1(x);  // T is int : ParamType is int&
   func1(cx); // T is const int : ParamType is const int&
   func1(rx); // T is const int : ParamType is const int&
+
+
+  // ParamTypeにconstがついている場合
+  // T のconstを推測する必要がなくなる
+
+  func2(x);  // T is int : ParamType is const int&
+  func2(cx); // T is int : ParamType is const int&
+  func2(rx); // T is int : ParamType is const int&
 }
