@@ -18,16 +18,30 @@ ParamType : const int
 */
 
 template<typename T>
-void func(T src) {}
+void func0(T src) {}
+
+template<typename T>
+void func1(T& src) {}
 
 int main() {
   {
-    // Tが参照でもポインタでもない場合は値渡し(コピー)となる
+    // ParamTypeが参照でもポインタでもない場合は値渡し(コピー)となる
     int x = 0;
     const int cx = x;
     const int& rx = x;
-    func(x);  // ParamType is int
-    func(cx); // ParamType is int
-    func(rx); // ParamType is int
+    func0(x);  // ParamType is int
+    func0(cx); // ParamType is int
+    func0(rx); // ParamType is int
+  }
+
+  {
+    // ParamTypeが参照またはポインタで、ユニヴァーサル参照出ない場合
+    // 引数の参照性は無視される
+    int x = 0;
+    const int cx = x;
+    const int& rx = x;
+    func1(x); // T is int : ParamType is int&
+    func1(cx); // T is const int : ParamType is const int&
+    func1(rx); // T is const int : ParamType is const int&
   }
 }
