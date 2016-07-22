@@ -50,4 +50,18 @@ int main() {
   // std::inisializer_listはテンプレートなのでTの推論が必要となる
   // {}内の初期化子でTを推論する
   auto x5 = { 0, 3, 1 }; // x5's type is std::inisializer_list<int>
+
+  /*
+    template<typename T>
+    void func(T param) {}
+
+    func({ 0, 3, 1 }); // err
+
+
+    temaplte<typename T>
+    void func(std::initializer_list<T> param) {}
+
+    func({ 0, 3, 1 }); // T is int
+                       // initList is std::inisializer_list<int>
+  */
 }
