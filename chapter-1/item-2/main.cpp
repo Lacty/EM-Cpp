@@ -30,4 +30,24 @@ int main() {
   
   auto func1 = func; // func1 is void (*)(int, float)
   auto func2 = func; // func2 is void (&)(int, float)
+
+
+  // initializatio
+  // autoは型を明示した変数宣言より利点が多いそうだ chapter-5参照
+
+  auto x1 = 0; // type is int
+  auto x2(0);  // 同上
+
+  auto x3 = { 0 }; // type is std::initializer_list<int>
+
+  // 2014/11 にC++ドラフト(N3922)に変更が加えられ
+  // 上とは異なる意味になった
+  // 最新のコンパイラなら対応してるかな？
+  auto x4{ 0 }; // type is int
+
+  // x5では２つの型推論が働いている
+  // {}が使用されているのでx5の型はstd::initializer_list
+  // std::inisializer_listはテンプレートなのでTの推論が必要となる
+  // {}内の初期化子でTを推論する
+  auto x5 = { 0, 3, 1 }; // x5's type is std::inisializer_list<int>
 }
