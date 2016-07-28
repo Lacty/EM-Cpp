@@ -31,4 +31,30 @@ int main() {
 
   // autoを使えばstd::vector<int>::size_typeになってくれる
   auto sz = v.size();
+
+
+  // std::pair使用時の注意点
+  std::unordered_map<std::string, int> m;
+
+  for (const std::unordered_map<std::string, int>& p : m) {
+    // do something
+  }
+
+  /*
+    ハッシュテーブル内のstd::pairの型が
+    std::pair<std::string, int> ではなく
+    std::pair<const std::string, int> である
+
+    コンパイラはstd::pair<const std::string, int>オブジェクトを
+    std::pair<std::string, int>に変換しようとする
+
+    とても無駄であり
+    このままでは
+    ループ内の処理の最後で毎回破棄されるオブジェクト-を指すポインタとなってしまう
+  */
+
+  // auto を使って解決する
+  for (const auto& p : m) {
+    // do something
+  }
 }
