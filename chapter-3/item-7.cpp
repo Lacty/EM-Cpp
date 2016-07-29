@@ -33,4 +33,15 @@ int main() {
   std::atomic<int> aa{ 0 }; // ok
   std::atomic<int> ab(0);   // ok
   std::atomic<int> ac = 0;  // err
+
+
+  /*
+    波括弧を使用したコンストラクタの呼び出し
+  */
+
+  class Hoge;
+
+  Hoge h(0); // 実引数を与えたコンストラクタの呼び出し
+  Hoge h2(); // Hogeを返す関数を宣言しようとしている
+  Hoge h3{}; // 実引数を与えずコンストラクタを呼び出す
 }
