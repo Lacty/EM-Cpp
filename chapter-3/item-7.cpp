@@ -44,4 +44,40 @@ int main() {
   Hoge h(0); // 実引数を与えたコンストラクタの呼び出し
   Hoge h2(); // Hogeを返す関数を宣言しようとしている
   Hoge h3{}; // 実引数を与えずコンストラクタを呼び出す
+
+
+  // std::initializer_listを使用したコンストラクタのないクラス
+  class Hoge {
+  public:
+    Hoge(int x, bool flag);
+    Hoge(int x, double y);
+  };
+
+  Hoge h(1, true);  // 1つ目のコンストラクタ
+  Hoge h2{1, true}; // 1つ目のコンストラクタ
+  Hoge h3(0, 0.5);  // 2つ目のコンストラクタ
+  Hoge h4{0, 0.5};  // 2つ目のコンストラクタ
+
+  /*
+    std::initializer_listを使用したコンストラクタをもつクラス
+
+    コンパイラから見て波括弧で囲った初期化子が
+    std::initializer_listを用いたコンストラクタの呼び出しであると少しでもみなせば
+    std::initializer_listを用いたコンストラクタを呼び出す
+  */
+
+  class Hoge {
+  public:
+    Hoge(int x, bool flag);
+    Hoge(int x, double y);
+
+    Hoge(std::initializer_list<long double> il);
+  };
+
+  Hoge h(0, true);  // 1つ目のコンストラクタ
+  Hoge h2{0, true}; // std::initializer_listのコンストラクタが呼ばれる
+                    // 0 と trueはlong doubleに変換される
+
+  Hoge h3(4, 0.6);  // 2つ目のコンストラクタ
+  Hoge h4{4, 0.6};  // std::initializer_listのコンストラクタが呼ばれる
 }
