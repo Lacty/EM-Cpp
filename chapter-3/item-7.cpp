@@ -80,4 +80,6 @@ int main() {
 
   Hoge h3(4, 0.6);  // 2つ目のコンストラクタ
   Hoge h4{4, 0.6};  // std::initializer_listのコンストラクタが呼ばれる
+
+  /* ↑ 動作確認 confirm/main3.cpp */
 }
